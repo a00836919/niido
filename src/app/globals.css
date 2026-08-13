@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
+/*
+  Niido — paleta tomada del color local: camionetas pintadas y brocado de huipil.
+  Fondo petróleo profundo, cuatro colores saturados que además codifican categorías.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --noche: #0c2029;
+  --noche-2: #12313d;
+  --hueso: #f6efe2;
+  --marigold: #ffb020;
+  --chicle: #f0426b;
+  --jade: #16a97f;
+  --cielo: #47b3e0;
+  --tinta: #061219;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-noche: var(--noche);
+  --color-noche-2: var(--noche-2);
+  --color-hueso: var(--hueso);
+  --color-marigold: var(--marigold);
+  --color-chicle: var(--chicle);
+  --color-jade: var(--jade);
+  --color-cielo: var(--cielo);
+  --color-tinta: var(--tinta);
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-instrument);
+  --font-mono: var(--font-mono-meta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--noche);
+  color: var(--hueso);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--marigold);
+  color: var(--tinta);
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Banda tejida: el motivo estructural de todo el sitio.
+   Cada franja es una categoría; el ancho irregular viene del brocado. */
+.telar {
+  height: 10px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--marigold) 0 22px,
+    var(--tinta) 22px 26px,
+    var(--chicle) 26px 40px,
+    var(--tinta) 40px 44px,
+    var(--jade) 44px 70px,
+    var(--tinta) 70px 74px,
+    var(--cielo) 74px 84px,
+    var(--tinta) 84px 88px
+  );
+}
+
+.telar-fina {
+  height: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .telar-anima {
+    animation: telar-corre 24s linear infinite;
+  }
+  .aparece {
+    animation: aparece 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+@keyframes telar-corre {
+  to {
+    background-position-x: 88px;
+  }
+}
+
+@keyframes aparece {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
 }

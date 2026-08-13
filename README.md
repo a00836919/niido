@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Niido
 
-## Getting Started
+Plataforma para descubrir qué hacer en Guatemala. Los negocios pequeños publican sus
+actividades; los miembros las reservan con una membresía mensual.
 
-First, run the development server:
+Estado actual: **fase 0** — landing pública con lista de espera. Ver [PLAN.md](PLAN.md).
+
+## Correr en local
 
 ```bash
+npm install
+cp .env.example .env.local   # y llenar las variables
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La landing funciona sin Supabase, pero el formulario devuelve un error hasta que se
+configuren las variables.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Conectar Supabase
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Crear un proyecto en [supabase.com](https://supabase.com).
+2. Correr `supabase/migrations/0001_waitlist.sql` en el SQL Editor.
+3. Copiar Project URL y la llave `anon` a `.env.local`:
 
-## Learn More
+```
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+```
 
-To learn more about Next.js, take a look at the following resources:
+La tabla `waitlist` solo permite INSERT por RLS: nadie puede leer la lista con la llave
+pública. Los correos se consultan desde el Table Editor de Supabase.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Desplegar en Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Subir el repo a GitHub e importarlo en Vercel.
+2. Agregar las dos variables de entorno en Settings → Environment Variables.
+3. Deploy. Cada push a `main` republica.
 
-## Deploy on Vercel
+## Estructura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/app/page.tsx        la landing completa
+src/app/actions.ts      server action que guarda en la lista de espera
+src/components/         Rodillo (planes que van pasando), Lista (formulario)
+src/lib/planes.ts       planes de muestra del hero
+supabase/migrations/    SQL versionado
+```
