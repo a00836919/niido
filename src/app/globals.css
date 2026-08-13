@@ -1,29 +1,33 @@
 @import "tailwindcss";
 
 /*
-  Niido — paleta tomada del color local: camionetas pintadas y brocado de huipil.
-  Fondo petróleo profundo, cuatro colores saturados que además codifican categorías.
+  Niido — identidad cálida y personal.
+  Base crema (bienvenida), tinta uva profunda, lila #ba56fc como voz de marca
+  y lima #26f01f como chispa eléctrica: solo sobre tinta oscura o como trazo,
+  nunca como texto sobre claro (no pasa contraste).
 */
 :root {
-  --noche: #0c2029;
-  --noche-2: #12313d;
-  --hueso: #f6efe2;
-  --marigold: #ffb020;
-  --chicle: #f0426b;
-  --jade: #16a97f;
-  --cielo: #47b3e0;
-  --tinta: #061219;
+  --crema: #faf6ef;
+  --crema-2: #f3ecdf;
+  --tinta: #221233;
+  --uva: #2f1747;
+  --lila: #ba56fc;
+  --lila-suave: #f0e3ff;
+  --lila-texto: #7a1fd0;
+  --lima: #26f01f;
+  --blanco: #fffdf9;
 }
 
 @theme inline {
-  --color-noche: var(--noche);
-  --color-noche-2: var(--noche-2);
-  --color-hueso: var(--hueso);
-  --color-marigold: var(--marigold);
-  --color-chicle: var(--chicle);
-  --color-jade: var(--jade);
-  --color-cielo: var(--cielo);
+  --color-crema: var(--crema);
+  --color-crema-2: var(--crema-2);
   --color-tinta: var(--tinta);
+  --color-uva: var(--uva);
+  --color-lila: var(--lila);
+  --color-lila-suave: var(--lila-suave);
+  --color-lila-texto: var(--lila-texto);
+  --color-lima: var(--lima);
+  --color-blanco: var(--blanco);
   --font-display: var(--font-bricolage);
   --font-body: var(--font-instrument);
   --font-mono: var(--font-mono-meta);
@@ -39,64 +43,193 @@ html {
 }
 
 body {
-  background: var(--noche);
-  color: var(--hueso);
+  background: var(--crema);
+  color: var(--tinta);
   font-family: var(--font-body), system-ui, sans-serif;
   font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 ::selection {
-  background: var(--marigold);
-  color: var(--tinta);
+  background: var(--lila);
+  color: var(--blanco);
 }
 
 :focus-visible {
-  outline: 3px solid var(--marigold);
+  outline: 3px solid var(--lila-texto);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
-/* Banda tejida: el motivo estructural de todo el sitio.
-   Cada franja es una categoría; el ancho irregular viene del brocado. */
-.telar {
-  height: 10px;
-  width: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--marigold) 0 22px,
-    var(--tinta) 22px 26px,
-    var(--chicle) 26px 40px,
-    var(--tinta) 40px 44px,
-    var(--jade) 44px 70px,
-    var(--tinta) 70px 74px,
-    var(--cielo) 74px 84px,
-    var(--tinta) 84px 88px
-  );
+button,
+summary,
+a {
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
-.telar-fina {
-  height: 4px;
+/* ————— La chispa: subrayado a mano, firma de la marca ————— */
+.chispa {
+  position: relative;
+  white-space: nowrap;
+}
+.chispa > svg {
+  position: absolute;
+  left: -2%;
+  bottom: -0.18em;
+  width: 104%;
+  height: 0.32em;
+  overflow: visible;
+}
+.chispa path {
+  fill: none;
+  stroke: var(--lima);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+/* ————— Boleto: borde perforado de las tarjetas de actividad ————— */
+.boleto {
+  position: relative;
+  background: var(--blanco);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(34, 18, 51, 0.06),
+    0 12px 32px -12px rgba(34, 18, 51, 0.18);
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (hover: hover) {
+  .boleto:hover {
+    transform: translateY(-6px) rotate(-0.4deg);
+    box-shadow:
+      0 2px 4px rgba(34, 18, 51, 0.06),
+      0 24px 48px -16px rgba(122, 31, 208, 0.28);
+  }
+}
+.boleto-corte {
+  position: relative;
+  border-top: 2px dashed rgba(34, 18, 51, 0.16);
+}
+.boleto-corte::before,
+.boleto-corte::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--crema);
+}
+.boleto-corte::before {
+  left: -29px;
+}
+.boleto-corte::after {
+  right: -29px;
+}
+
+/* ————— Marquee de categorías ————— */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  gap: 0;
+  user-select: none;
+}
+.marquee-pista {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-right: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* ————— Coreografía de entrada del hero (al cargar) ————— */
+.velo {
+  display: block;
+  overflow: hidden;
+}
+.velo > span {
+  display: block;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .telar-anima {
-    animation: telar-corre 24s linear infinite;
+  .marquee-pista {
+    animation: marquee-corre 28s linear infinite;
   }
-  .aparece {
-    animation: aparece 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  .marquee:hover .marquee-pista {
+    animation-play-state: paused;
+  }
+
+  .velo > span {
+    transform: translateY(110%);
+    animation: sube 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--d, 0ms);
+  }
+  .hero-suave {
+    opacity: 0;
+    animation: aparece-suave 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--d, 0ms);
+  }
+  .chispa path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: traza 700ms cubic-bezier(0.5, 0, 0.2, 1) forwards;
+    animation-delay: var(--d, 900ms);
+  }
+
+  /* Revelado al hacer scroll: Reveal.tsx agrega .is-in */
+  .revela {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .is-in .revela,
+  .revela.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .flota {
+    animation: flota 6s ease-in-out infinite;
   }
 }
 
-@keyframes telar-corre {
+@keyframes sube {
   to {
-    background-position-x: 88px;
+    transform: none;
   }
 }
-
-@keyframes aparece {
+@keyframes aparece-suave {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes traza {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes marquee-corre {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes flota {
+  0%,
+  100% {
+    transform: translateY(0) rotate(1.2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-0.6deg);
   }
 }
