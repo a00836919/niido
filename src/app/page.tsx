@@ -3,26 +3,8 @@ import Lista from "@/components/Lista";
 import Reveal from "@/components/Reveal";
 import Chispa from "@/components/Chispa";
 import Pasos from "@/components/Pasos";
-import Cupos from "@/components/Cupos";
+import Naipes from "@/components/Naipes";
 import { PLANES, CATEGORIAS } from "@/lib/planes";
-
-const PARA_NEGOCIOS = [
-  {
-    titulo: "No pagás por publicar",
-    texto:
-      "Subir tus actividades es gratis. Cobramos membresía a quien reserva, no comisión de entrada a vos.",
-  },
-  {
-    titulo: "Llenás los espacios vacíos",
-    texto:
-      "Ese martes en que solo llegan tres personas es justo el que a nosotros nos sirve llenar.",
-  },
-  {
-    titulo: "El marketing lo ponemos nosotros",
-    texto:
-      "Vos das la clase. La foto, el catálogo, los recordatorios y la gente nueva corren por nuestra cuenta.",
-  },
-];
 
 const FAQ = [
   {
@@ -136,10 +118,10 @@ export default function Home() {
             Por qué existe Niido
           </p>
           <p className="revela mt-8 font-display text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.25] font-bold tracking-[-0.03em] text-balance" style={{ "--d": "120ms" } as React.CSSProperties}>
-            Nadie se muda de país para conocer gente: aprende a hacer tortillas, se
-            mete a una clase de salsa, sube un volcán. Lo nuevo pasa{" "}
-            <span className="text-lila-texto">haciendo cosas</span>. Niido existe
-            para que probar algo nuevo sea tan fácil como pedir comida.
+            Acá hay gente que sabe bailar salsa, tornear barro, asar al fuego y
+            subir volcanes. Y del otro lado, gente con ganas de probarlo todo.
+            Niido existe para juntarlas: la cultura no se guarda,{" "}
+            <span className="text-lila-texto">se comparte haciéndola</span>.
           </p>
         </Reveal>
 
@@ -248,18 +230,7 @@ export default function Home() {
           </div>
 
           <div className="revela mt-14" style={{ "--d": "120ms" } as React.CSSProperties}>
-            <Cupos />
-          </div>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {PARA_NEGOCIOS.map((item, n) => (
-              <div key={item.titulo} className="revela rounded-2xl border-2 border-tinta/10 bg-blanco p-7 transition-colors duration-200 hover:border-lila/40" style={{ "--d": `${n * 110}ms` } as React.CSSProperties}>
-                <h3 className="font-display text-xl font-bold tracking-[-0.02em]">
-                  {item.titulo}
-                </h3>
-                <p className="mt-3 leading-relaxed text-tinta/65">{item.texto}</p>
-              </div>
-            ))}
+            <Naipes />
           </div>
         </Reveal>
 

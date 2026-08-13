@@ -105,41 +105,44 @@ a {
   transform: rotate(-1.6deg);
 }
 
-/* ————— Deslizador de cupos (anfitriones) ————— */
-.rango {
-  appearance: none;
+/* ————— Naipes de anfitriones: se voltean al pasar o tocar ————— */
+.naipe {
+  perspective: 1400px;
+  display: block;
   width: 100%;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(
-    to right,
-    var(--lila) 0%,
-    var(--lila) var(--pct, 30%),
-    rgba(34, 18, 51, 0.12) var(--pct, 30%)
-  );
-  outline-offset: 6px;
 }
-.rango::-webkit-slider-thumb {
-  appearance: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--tinta);
-  border: 4px solid var(--lima);
-  cursor: grab;
-  transition: transform 150ms ease;
+.naipe-giro {
+  position: relative;
+  display: grid;
+  min-height: 15.5rem;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.25, 1);
 }
-.rango::-webkit-slider-thumb:active {
-  cursor: grabbing;
-  transform: scale(1.15);
+.naipe-cara {
+  display: flex;
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
-.rango::-moz-range-thumb {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--tinta);
-  border: 4px solid var(--lima);
-  cursor: grab;
+.naipe-dorso {
+  transform: rotateY(180deg);
+}
+.naipe.es-volteado .naipe-giro {
+  transform: rotateY(180deg);
+}
+@media (hover: hover) {
+  .naipe:hover .naipe-giro,
+  .naipe:focus-visible .naipe-giro {
+    transform: rotateY(180deg);
+  }
+  .naipe.es-volteado:hover .naipe-giro {
+    transform: rotateY(0deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .naipe-giro {
+    transition: none;
+  }
 }
 
 /* ————— Boleto: borde perforado de las tarjetas de actividad ————— */

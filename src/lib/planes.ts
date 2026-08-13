@@ -79,5 +79,4 @@ export const CATEGORIAS = [
   "Fotografía",
   "Escalada",
   "Teatro",
-  "Huertos",
 ];
