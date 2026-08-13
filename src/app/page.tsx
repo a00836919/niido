@@ -2,25 +2,9 @@ import Rodillo from "@/components/Rodillo";
 import Lista from "@/components/Lista";
 import Reveal from "@/components/Reveal";
 import Chispa from "@/components/Chispa";
+import Pasos from "@/components/Pasos";
+import Cupos from "@/components/Cupos";
 import { PLANES, CATEGORIAS } from "@/lib/planes";
-
-const PASOS = [
-  {
-    verbo: "Entrás",
-    texto:
-      "Abrís Niido un martes sin plan y ves lo que hay esta semana cerca de vos, con fecha, zona y cupo real.",
-  },
-  {
-    verbo: "Reservás",
-    texto:
-      "Apartás tu lugar en dos toques. La membresía cubre la actividad; no andás negociando el pago por WhatsApp.",
-  },
-  {
-    verbo: "Vas",
-    texto:
-      "Llegás, probás algo que no habías hecho, conocés gente. El anfitrión recibe su pago por cada quien llegó.",
-  },
-];
 
 const PARA_NEGOCIOS = [
   {
@@ -88,11 +72,15 @@ export default function Home() {
                 Guatemala · abrimos pronto
               </p>
 
-              <h1 className="mt-6 font-display text-[clamp(2.9rem,7.5vw,5.2rem)] leading-[0.96] font-extrabold tracking-[-0.045em]">
-                <span className="velo"><span style={{ "--d": "250ms" } as React.CSSProperties}>«No hay nada</span></span>
-                <span className="velo"><span style={{ "--d": "350ms" } as React.CSSProperties}>que hacer»</span></span>
-                <span className="velo"><span style={{ "--d": "450ms" } as React.CSSProperties}>
-                  <Chispa delay="1100ms">es mentira.</Chispa>
+              <h1 className="mt-6 font-display text-[clamp(2.6rem,6.8vw,4.7rem)] leading-[1] font-extrabold tracking-[-0.045em]">
+                <span className="velo text-tinta/60"><span style={{ "--d": "250ms" } as React.CSSProperties}>
+                  <span className="tachado" style={{ "--d": "1000ms" } as React.CSSProperties}>«No hay nada</span>
+                </span></span>
+                <span className="velo text-tinta/60"><span style={{ "--d": "350ms" } as React.CSSProperties}>
+                  <span className="tachado" style={{ "--d": "1250ms" } as React.CSSProperties}>que hacer»</span>
+                </span></span>
+                <span className="velo pt-2"><span style={{ "--d": "450ms" } as React.CSSProperties}>
+                  ¿Qué hacemos <Chispa delay="1700ms">hoy?</Chispa>
                 </span></span>
               </h1>
 
@@ -200,19 +188,9 @@ export default function Home() {
             <h2 className="revela font-display text-[clamp(2rem,4.5vw,3rem)] leading-[1] font-extrabold tracking-[-0.035em]">
               Tres pasos y ya estás afuera de tu casa
             </h2>
-            <ol className="mt-16 grid gap-12 md:grid-cols-3">
-              {PASOS.map((paso, n) => (
-                <li key={paso.verbo} className="revela" style={{ "--d": `${n * 130}ms` } as React.CSSProperties}>
-                  <span className="flex size-12 items-center justify-center rounded-full bg-tinta font-display text-lg font-bold text-lima">
-                    {n + 1}
-                  </span>
-                  <h3 className="mt-5 font-display text-2xl font-bold tracking-[-0.02em]">
-                    {paso.verbo}
-                  </h3>
-                  <p className="mt-3 leading-relaxed text-tinta/65">{paso.texto}</p>
-                </li>
-              ))}
-            </ol>
+            <div className="revela" style={{ "--d": "150ms" } as React.CSSProperties}>
+              <Pasos />
+            </div>
           </div>
         </Reveal>
 
@@ -269,7 +247,11 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
+          <div className="revela mt-14" style={{ "--d": "120ms" } as React.CSSProperties}>
+            <Cupos />
+          </div>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             {PARA_NEGOCIOS.map((item, n) => (
               <div key={item.titulo} className="revela rounded-2xl border-2 border-tinta/10 bg-blanco p-7 transition-colors duration-200 hover:border-lila/40" style={{ "--d": `${n * 110}ms` } as React.CSSProperties}>
                 <h3 className="font-display text-xl font-bold tracking-[-0.02em]">

@@ -24,11 +24,11 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   title: "Niido — qué hacer en Guatemala esta semana",
   description:
-    "Una membresía, un catálogo de clases, talleres y planes de gente que hace cosas en Guatemala. Reservá y andá.",
+    "Convertimos el «no hay nada que hacer» en un «¿qué hacemos hoy?». Una membresía, un catálogo de clases, talleres y planes de gente que hace cosas en Guatemala.",
   openGraph: {
     title: "Niido — qué hacer en Guatemala esta semana",
     description:
-      "Una membresía, un catálogo de clases, talleres y planes de gente que hace cosas en Guatemala.",
+      "Convertimos el «no hay nada que hacer» en un «¿qué hacemos hoy?».",
     locale: "es_GT",
     type: "website",
   },
