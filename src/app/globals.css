@@ -6,13 +6,16 @@
   y lima #26f01f como chispa eléctrica: solo sobre tinta oscura o como trazo,
   nunca como texto sobre claro (no pasa contraste).
 */
+/* Tokens tomados del logo: crema y tinta salen del archivo original,
+   la lavanda es el punto de la segunda «i». */
 :root {
-  --crema: #faf6ef;
-  --crema-2: #f3ecdf;
-  --tinta: #221233;
-  --uva: #2f1747;
+  --crema: #fef6ea;
+  --crema-2: #f6ecdb;
+  --tinta: #191818;
+  --uva: #2a2436;
+  --lavanda: #9884c4;
   --lila: #ba56fc;
-  --lila-suave: #f0e3ff;
+  --lila-suave: #efe6ff;
   --lila-texto: #7a1fd0;
   --lima: #26f01f;
   --blanco: #fffdf9;
@@ -23,6 +26,7 @@
   --color-crema-2: var(--crema-2);
   --color-tinta: var(--tinta);
   --color-uva: var(--uva);
+  --color-lavanda: var(--lavanda);
   --color-lila: var(--lila);
   --color-lila-suave: var(--lila-suave);
   --color-lila-texto: var(--lila-texto);

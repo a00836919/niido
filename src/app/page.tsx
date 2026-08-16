@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import Chispa from "@/components/Chispa";
 import Pasos from "@/components/Pasos";
 import Naipes from "@/components/Naipes";
+import Logo from "@/components/Logo";
 import { PLANES, CATEGORIAS } from "@/lib/planes";
 
 const FAQ = [
@@ -33,9 +34,9 @@ export default function Home() {
   return (
     <>
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <span className="hero-suave font-display text-[1.7rem] font-extrabold tracking-[-0.04em]" style={{ "--d": "100ms" } as React.CSSProperties}>
-          niido<span className="text-lila">.</span>
-        </span>
+        <a href="#" aria-label="Niido, inicio" className="hero-suave text-tinta" style={{ "--d": "100ms" } as React.CSSProperties}>
+          <Logo className="h-8 w-auto" />
+        </a>
         <a
           href="#lista"
           className="hero-suave rounded-full border-2 border-tinta/15 px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-tinta/70 transition-colors duration-200 hover:border-lila hover:text-lila-texto"
@@ -102,8 +103,9 @@ export default function Home() {
                 {CATEGORIAS.map((cat) => (
                   <span key={cat} className="flex items-center gap-[clamp(1.5rem,4vw,3rem)]">
                     {cat}
-                    <svg width="10" height="10" viewBox="0 0 10 10" className="shrink-0 opacity-70">
-                      <circle cx="5" cy="5" r="4" fill="currentColor" />
+                    {/* El punto de la «i» del logo, como separador */}
+                    <svg width="10" height="10" viewBox="0 0 10 10" className="shrink-0">
+                      <circle cx="5" cy="5" r="4" fill="var(--lavanda)" />
                     </svg>
                   </span>
                 ))}
@@ -276,9 +278,7 @@ export default function Home() {
 
       <footer className="bg-tinta">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 border-t border-blanco/12 px-6 py-10 font-mono text-[12px] text-blanco/40 sm:flex-row sm:items-center sm:justify-between">
-          <span className="font-display text-lg font-extrabold tracking-[-0.04em] text-blanco/85">
-            niido<span className="text-lila">.</span>
-          </span>
+          <Logo className="h-7 w-auto text-blanco/85" />
           <span>Hecho en Guatemala · {new Date().getFullYear()}</span>
         </div>
       </footer>
